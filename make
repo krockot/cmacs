@@ -52,5 +52,13 @@ echo Creating zip file for upload...
 zip -r9 $APP_ZIP * > /dev/null
 popd > /dev/null
 
+pushd $BUILD_DIR > /dev/null
+rm -rf cmacs 2> /dev/null
+mkdir cmacs
+pushd cmacs > /dev/null
+unzip ../cmacs.zip > /dev/null
+popd > /dev/null
+popd > /dev/null
+
 echo "Great success!"
 
