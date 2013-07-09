@@ -28,6 +28,23 @@ function initializeEditor() {
     },
     readOnly: true,
   });
+
+  // Usurp the console
+  var consoleClear = console.clear;
+  var consoleLog = console.log;
+  var editorConsole = document.querySelector('#console');
+  console.clear = function() {
+    consoleClear.apply(this, arguments);
+    editorConsole.innerText = "";
+  };
+  console.log = function() {
+    consoleLog.apply(this, arguments);
+    var text = "";
+    for (var i = 0; i < arguments.length; ++i) {
+      text += arguments[i].toString() + "\n";
+    }
+    editorConsole.innerText = editorConsole.innerText + text;
+  };
 };
 
 function runProgram() {
