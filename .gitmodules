@@ -1,6 +1,6 @@
 [submodule "submodules/ccc"]
 	path = submodules/ccc
 	url = git://github.com/krockot/ccc
-[submodule "ace"]
+[submodule "submodules/ace"]
 	path = submodules/ace
-	url = git://github.com/ajaxorg/ace.git
+	url = git://github.com/ajaxorg/ace
