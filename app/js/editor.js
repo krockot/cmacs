@@ -4,6 +4,7 @@ function initializeEditor() {
   editor.getSession().setMode("ace/mode/scheme");
   editor.getSession().setTabSize(2);
   editor.getSession().setUseSoftTabs(true);
+  editor.setFontSize(14);
 
   editor.commands.addCommand({
     name: "Insert lambda",
