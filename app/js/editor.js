@@ -48,4 +48,5 @@ function runProgram() {
     });
 }
 
-window.addEventListener('load', initializeEditor);
+initializeEditor();
+
