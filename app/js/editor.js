@@ -32,37 +32,54 @@ function initializeEditor() {
   // Usurp the console
   var consoleClear = console.clear;
   var consoleLog = console.log;
+  var consoleError = console.error;
   var editorConsole = document.querySelector('#console');
   console.clear = function() {
     consoleClear.apply(this, arguments);
     editorConsole.innerText = "";
   };
-  console.log = function() {
-    consoleLog.apply(this, arguments);
+  var stringifyArgs = function() {
     var text = "";
     for (var i = 0; i < arguments.length; ++i) {
       text += arguments[i].toString() + "\n";
     }
-    editorConsole.innerText = editorConsole.innerText + text;
+    return text;
+  };
+  console.log = function() {
+    consoleLog.apply(this, arguments);
+    var entry = document.createElement("span");
+    entry.innerText = stringifyArgs.apply(null, arguments);
+    editorConsole.appendChild(entry);
+  };
+  console.error = function() {
+    consoleError.apply(this, arguments);
+    var entry = document.createElement("span");
+    entry.setAttribute("class", "error");
+    entry.innerText = stringifyArgs.apply(null, arguments);
+    editorConsole.appendChild(entry);
   };
 };
 
 function runProgram() {
   var editor = ace.edit("editor");
   var code = editor.getValue();
-  var forms = ccc.Parser.parse(ccc.lib.base.keywords + code);
-  var environment = new ccc.Environment();
-  environment.importLibrary(ccc.lib.base);
-  environment.bindGlobal("window", new ccc.NativeObject(window));
-  console.clear();
-  environment.evalProgram(forms, function(value, isFinal) {
+  try {
+    var forms = ccc.Parser.parse(ccc.lib.base.keywords + code);
+    var environment = new ccc.Environment();
+    environment.importLibrary(ccc.lib.base);
+    environment.bindGlobal("window", new ccc.NativeObject(window));
+    console.clear();
+    environment.evalProgram(forms, function(value, isFinal) {
       if (!isFinal)
         return;
-      console.log(value.toSource());
-    },
-    function(error) {
+      console.log(value.toSource())
+    }, function(error) {
       throw error;
     });
+  } catch(error) {
+    console.error(error);
+    throw error;
+  }
 }
 
 initializeEditor();
