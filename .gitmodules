@@ -1,6 +1,8 @@
 [submodule "submodules/ccc"]
 	path = submodules/ccc
 	url = git://github.com/krockot/ccc
+  ignore = dirty
 [submodule "submodules/ace"]
 	path = submodules/ace
 	url = git://github.com/ajaxorg/ace
+  ignore = dirty
