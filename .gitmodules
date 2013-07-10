@@ -2,6 +2,7 @@
 	path = submodules/ccc
 	url = git://github.com/krockot/ccc
   ignore = dirty
+  branch = master
 [submodule "submodules/ace"]
 	path = submodules/ace
 	url = git://github.com/ajaxorg/ace
