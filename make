@@ -58,7 +58,7 @@ popd > /dev/null
 ln -sf ../../submodules/ccc/ccc.min.js $APP_DIR/js/ccc.js
 ln -sf ../../submodules/ace/build/src-min-noconflict $APP_DIR/js/ace
 
-sed s/99.99.99.99/$VERSION/ $APP_DIR/manifest.json.in $APP_DIR/manifest.json
+sed s/99.99.99.99/$VERSION/ $APP_DIR/manifest.json.in > $APP_DIR/manifest.json
 
 if [ ! -d $BUILD_DIR ]; then mkdir $BUILD_DIR; fi
 pushd $APP_DIR > /dev/null
