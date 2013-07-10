@@ -1,3 +1,5 @@
 app/js/ace
 app/js/ccc.js
-build
+app/manifest.json
+build/cmacs
+build/cmacs.zip
