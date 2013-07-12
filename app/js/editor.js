@@ -59,6 +59,15 @@ function initializeEditor() {
     entry.innerText = stringifyArgs.apply(null, arguments);
     editorConsole.appendChild(entry);
   };
+
+  chrome.storage.sync.get("lastSession", function(data) {
+    if (data.lastSession)
+      editor.setValue(data.lastSession);
+  });
+
+  editor.getSession().on("change", function() {
+    chrome.storage.sync.set({ lastSession: editor.getValue() });
+  });
 };
 
 function runProgram() {

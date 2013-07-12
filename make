@@ -17,8 +17,7 @@ else
   build_ace=1
 fi
 
-VERSION=$(cat $BUILD_DIR/VERSION)
-VERSION=$(echo $VERSION | awk -F. '{ print $1"."$2"."$3"."$4 + 1 }')
+VERSION=99.99.99.99
 
 while getopts av: flag; do
   case $flag in
@@ -30,8 +29,6 @@ while getopts av: flag; do
       ;;
   esac
 done
-
-echo $VERSION > $BUILD_DIR/VERSION
 
 if [ $build_ace -eq 1 ]; then
   pushd $ACE_DIR > /dev/null
