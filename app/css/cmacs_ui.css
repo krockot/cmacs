@@ -1,0 +1,47 @@
+.cmacs_ui_Frame {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.cmacs_ui_TabStrip {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 28px;
+}
+
+.cmacs_ui_Tab {
+  border: solid 1px #555;
+  height: 26px;
+  bottom: 0;
+  font-size: 14px;
+}
+
+.cmacs_ui_StatusBar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 18px;
+  font-size: 14px;
+}
+
+.cmacs_ui_ContentPanel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 29px;
+  bottom: 17px;
+}
+
+.cmacs_ui_ContentPanel > div {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}

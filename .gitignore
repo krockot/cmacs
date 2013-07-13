@@ -1,7 +1,7 @@
 app/js/ace
 app/js/ccc.js
 app/manifest.json
-app/js/editor.js
+app/js/cmacs.js
 build/cmacs
 build/cmacs.zip
 

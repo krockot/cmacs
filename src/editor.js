@@ -69,9 +69,9 @@ function initializeEditor() {
     editor.focus();
   });
 
-  editor.getSession().on("change", function() {
+  /*editor.getSession().on("change", function() {
     chrome.storage.sync.set({ lastSession: editor.getValue() });
-  });
+  });*/
 };
 
 function runProgram() {
@@ -95,6 +95,3 @@ function runProgram() {
     throw error;
   }
 }
-
-initializeEditor();
-

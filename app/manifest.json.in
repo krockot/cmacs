@@ -5,9 +5,7 @@
   "description": "It's an editor, or an OS, or",
   "app": {
     "background": {
-      "scripts": [
-        "js/background.js"
-      ]
+      "scripts": ["/js/background.js"]
     }
   },
   "icons": {
@@ -19,7 +17,21 @@
   "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCGbFfLyZlog0dKjr/9lVTUwGZ31SRRsQdUwPpGnSB92aBB5fsEOh4DhUqJ//hibKqwvbQMjldIDoNhoD1zTC2GONePyitPaGpA8a6TDfqJAOSTfHpvr1p1m+SYu1Kz/MTSG+dvSGsEwr2lNPB1sa0FjV83cmmYyMheEi3zc2asFwIDAQAB",
 
   "permissions": [
-    "storage"
+    "alarms",
+    "bluetooth",
+    "fileSystem",
+    "fileSystem.write",
+    "identity",
+    "notifications",
+    "serial",
+    { "socket": [ "tcp-connect", "tcp-listen", "udp-send-to", "udp-bind" ] },
+    "storage",
+    "syncFileSystem",
+    "systemInfo.display",
+    "tts",
+    "usb",
+    "webview",
+    "https://*/*"
   ]
 }
 

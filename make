@@ -5,6 +5,7 @@ ROOTNAME=$(dirname $SCRIPT)
 ROOT=$(readlink -f $ROOTNAME)
 ACE_DIR=$ROOT/submodules/ace
 CCC_DIR=$ROOT/submodules/ccc
+SRC_DIR=$ROOT/src
 APP_DIR=$ROOT/app
 APP_FILES="js css html resources manifest.json"
 
@@ -50,9 +51,10 @@ else
   exit 1
 fi
 
-echo Concatenating editor scripts...
-cd $APP_DIR/js
-cat $(find editor -name '*.js') > editor.js
+echo Building cmacs...
+cd $ROOT
+cat $(find $SRC_DIR -name _init.js | LC_COLLATE=C sort) > $APP_DIR/js/cmacs.js
+cat $(find $SRC_DIR -name '*.js' -not -name _init.js) >> $APP_DIR/js/cmacs.js
 
 ln -sf ../../submodules/ccc/ccc.min.js $APP_DIR/js/ccc.js
 ln -sf ../../submodules/ace/build/src-min-noconflict $APP_DIR/js/ace
