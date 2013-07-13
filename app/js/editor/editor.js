@@ -61,8 +61,12 @@ function initializeEditor() {
   };
 
   chrome.storage.sync.get("lastSession", function(data) {
-    if (data.lastSession)
+    if (data.lastSession) {
       editor.setValue(data.lastSession);
+      editor.clearSelection();
+    }
+
+    editor.focus();
   });
 
   editor.getSession().on("change", function() {

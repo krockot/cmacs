@@ -31,7 +31,7 @@ while getopts av: flag; do
 done
 
 if [ $build_ace -eq 1 ]; then
-  pushd $ACE_DIR > /dev/null
+  cd $ACE_DIR
   echo Building ACE...
   if npm install && node Makefile.dryice.js -m -nc; then
     echo "ACE built successfully"
@@ -39,38 +39,39 @@ if [ $build_ace -eq 1 ]; then
     echo "ERROR: Failed to build ACE"
     exit 1
   fi
-  popd > /dev/null
 fi
 
-pushd $CCC_DIR > /dev/null
+cd $CCC_DIR
 echo Building Ccc...
-if ./make > /dev/null; then
+if ./make; then
   echo "Ccc built successfully"
 else
   echo "ERROR: Failed to build Ccc"
   exit 1
 fi
-popd > /dev/null
+
+echo Concatenating editor scripts...
+cd $APP_DIR/js
+cat $(find editor -name '*.js') > editor.js
 
 ln -sf ../../submodules/ccc/ccc.min.js $APP_DIR/js/ccc.js
 ln -sf ../../submodules/ace/build/src-min-noconflict $APP_DIR/js/ace
 
-sed s/99.99.99.99/$VERSION/ $APP_DIR/manifest.json.in > $APP_DIR/manifest.json
+sed s/99.99.99.99/$VERSION/ $APP_DIR/manifest.json.in |
+  sed s/\"key\".*// > $APP_DIR/manifest.json
 
 if [ ! -d $BUILD_DIR ]; then mkdir $BUILD_DIR; fi
-pushd $APP_DIR > /dev/null
+cd $APP_DIR
 echo Creating zip file for upload...
 rm $APP_ZIP
 zip -r9 $APP_ZIP $APP_FILES > /dev/null
-popd > /dev/null
 
-pushd $BUILD_DIR > /dev/null
+cd $BUILD_DIR
 rm -rf cmacs 2> /dev/null
 mkdir cmacs
-pushd cmacs > /dev/null
+cd cmacs
 unzip ../cmacs.zip > /dev/null
-popd > /dev/null
-popd > /dev/null
+cp $APP_DIR/manifest.json.in manifest.json
 
 echo "Great success!"
 
