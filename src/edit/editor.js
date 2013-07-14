@@ -17,6 +17,17 @@ cmacs.edit.Editor = function(root) {
     },
     readOnly: false
   });
+
+  this.editor_.on('change', function() {
+    chrome.storage.sync.set({
+      lastSession: this.editor_.getValue()
+    });
+  }.bind(this));
+
+  chrome.storage.sync.get('lastSession', function(result) {
+    if (result.lastSession)
+      this.editor_.setValue(result.lastSession);
+  }.bind(this));
 };
 
 cmacs.edit.Editor.prototype.getContents = function() {
