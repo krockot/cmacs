@@ -5,8 +5,12 @@ ROOTNAME=$(dirname $SCRIPT)
 ROOT=$(readlink -f $ROOTNAME)
 ACE_DIR=$ROOT/submodules/ace
 CCC_DIR=$ROOT/submodules/ccc
+PEG_DIR=$ROOT/submodules/pegjs
 SRC_DIR=$ROOT/src
 APP_DIR=$ROOT/app
+
+PEG_BIN=$PEG_DIR/bin/pegjs
+
 APP_FILES="js css html resources manifest.json"
 
 BUILD_DIR=$ROOT/build
@@ -18,12 +22,21 @@ else
   build_ace=1
 fi
 
+if [[ -f "$PEG_BIN"  && -d submodules/pegjs/node_modules/uglify-js ]]; then
+  build_pegjs=0
+else
+  build_pegjs=1
+fi
+
 VERSION=99.99.99.99
 
 while getopts av: flag; do
   case $flag in
     a)
       build_ace=1
+      ;;
+    p)
+      build_pegjs=1
       ;;
     v) 
       VERSION=$OPTARG
@@ -42,9 +55,20 @@ if [ $build_ace -eq 1 ]; then
   fi
 fi
 
+if [ $build_pegjs -eq 1 ]; then
+  cd $PEG_DIR
+  echo Building pegjs...
+  if npm install -l uglify-js && make; then
+    echo "pegjs built successfully"
+  else
+    echo "ERROR: Failed to build pegjs"
+    exit 1
+  fi
+fi
+
 cd $CCC_DIR
 echo Building Ccc...
-if ./make; then
+if PATH=$PATH:$PEG_DIR/bin ./make; then
   echo "Ccc built successfully"
 else
   echo "ERROR: Failed to build Ccc"

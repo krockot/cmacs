@@ -7,3 +7,6 @@
 	path = submodules/ace
 	url = git://github.com/ajaxorg/ace
   ignore = dirty
+[submodule "submodules/pegjs"]
+	path = submodules/pegjs
+	url = https://github.com/dmajda/pegjs
