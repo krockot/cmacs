@@ -1,5 +1,5 @@
 cmacs
 =====
 
-Ccc editor and OS for the Chrome apps platform.
+Scriptable editor for the Chrome Apps platform.
 
