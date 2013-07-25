@@ -12,6 +12,9 @@
   right: 0;
   top: 0;
   height: 28px;
+  display: table;
+  table-layout: fixed;
+  width: 100%;
 }
 
 .cmacs_ui_Tab {
@@ -19,6 +22,9 @@
   height: 26px;
   bottom: 0;
   font-size: 14px;
+  display: table-cell;
+  text-align: center;
+  padding-top: 8px;
 }
 
 .cmacs_ui_StatusBar {

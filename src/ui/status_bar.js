@@ -1,4 +1,4 @@
-cmacs.ui.StatusBar = function(parent) {
+cmacs.ui.StatusBar = function(parent, session) {
   this.document_ = parent.ownerDocument;
   this.element_ = this.document_.createElement('div');
   this.element_.className = 'cmacs_ui_StatusBar';
