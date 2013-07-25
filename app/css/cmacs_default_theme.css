@@ -1,27 +1,23 @@
 .cmacs_ui_Frame {
-  background-color: black;
 }
 
 .cmacs_ui_TabStrip {
-  background-color: #222;
 }
 
 .cmacs_ui_Tab {
-  background-color: #888;
-  color: #aaa;
-  border: solid #aaa 1px;
-  border-bottom: none;
+}
+
+.cmacs_ui_Tab > span {
 }
 
 .cmacs_ui_Tab.active {
-  background-color: #222;
-  color: white;
+}
+
+.cmacs_ui_Tab.active > span {
 }
 
 .cmacs_ui_StatusBar {
-  background-color: #666;
 }
 
-.cmacs_ui_ContentPanel {
-  background-color: #444;
+.cmacs_ui_ViewContainer {
 }

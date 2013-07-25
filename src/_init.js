@@ -1,6 +1,6 @@
-cmacs = {};
-
 ace.Document = ace.require('ace/document').Document;
+
+cmacs = {};
 
 window.addEventListener('load', function() {
   var session = new cmacs.edit.Session();

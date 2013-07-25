@@ -1,7 +1,7 @@
 cmacs.ui.ViewContainer = function(parent, session) {
   this.document_ = parent.ownerDocument;
   this.element_ = this.document_.createElement('div');
-  this.element_.className = 'cmacs_ui_ContentPanel';
+  this.element_.className = 'cmacs_ui_ViewContainer';
   this.content_ = this.document_.createElement('div');
   this.element_.appendChild(this.content_);
   parent.appendChild(this.element_);
@@ -9,6 +9,8 @@ cmacs.ui.ViewContainer = function(parent, session) {
   this.editor_ = ace.edit(this.content_);
   this.editor_.setTheme('ace/theme/monokai');
   this.editor_.setFontSize(14);
+  this.editor_.setHighlightActiveLine(false);
+  this.editor_.setPrintMarginColumn(0);
 
   this.editor_.commands.addCommand({
     name: 'Insert lambda',
@@ -26,9 +28,12 @@ cmacs.ui.ViewContainer = function(parent, session) {
   this.onViewChanged = new cmacs.common.Event();
 };
 
-cmacs.ui.ViewContainer.prototype.switchToView = function(view) {
+cmacs.ui.ViewContainer.prototype.switchToView = function(view, dontFocus) {
   this.editor_.setSession(view.aceSession_);
   this.currentView_ = view;
+  if (!dontFocus) {
+    this.editor_.focus();
+  }
   this.onViewChanged.fire();
 };
 

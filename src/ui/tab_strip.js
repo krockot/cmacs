@@ -35,9 +35,15 @@ cmacs.ui.TabStrip.prototype.createTabForView_ = function(view) {
   };
 
   tab.element.className = 'cmacs_ui_Tab';
-  tab.element.innerText = view.getBuffer().getName();
+  tab.element.innerHTML = '<span>' + view.getBuffer().getName() + '</span>';
+  tab.element.addEventListener('click',
+      this.onTabClicked_.bind(this, tab), false);
 
   return tab;
+};
+
+cmacs.ui.TabStrip.prototype.onTabClicked_ = function(tab) {
+  this.viewContainer_.switchToView(tab.view);
 };
 
 cmacs.ui.TabStrip.prototype.updateTabs = function() {
@@ -45,8 +51,13 @@ cmacs.ui.TabStrip.prototype.updateTabs = function() {
   this.element_.innerHTML = '';
   this.tabs_ = [];
 
+  if (views.length === 0)
+    return;
+
+  var tabWidth = 100 / views.length;
   views.forEach(function(view) {
     var tab = this.createTabForView_(view);
+    tab.element.style.width = tabWidth + '%';
     this.tabs_.push(tab);
     this.element_.appendChild(tab.element);
     if (this.viewContainer_.getCurrentView() === view) {
