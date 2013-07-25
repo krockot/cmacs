@@ -26,6 +26,19 @@ cmacs.ui.ViewContainer = function(parent, session) {
 
   this.currentView_ = null;
   this.onViewChanged = new cmacs.common.Event();
+
+  this.session_ = session;
+  this.session_.onChanged.addListener(this.handleSessionChange_.bind(this));
+};
+
+cmacs.ui.ViewContainer.prototype.handleSessionChange_ = function() {
+  var views = this.session_.getViews();
+  if (views.length > 0) {
+    this.content_.style.display = 'block';
+  } else {
+    this.content_.style.display = 'none';
+    this.currentView_ = null;
+  }
 };
 
 cmacs.ui.ViewContainer.prototype.switchToView = function(view, dontFocus) {

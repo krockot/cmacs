@@ -20,33 +20,14 @@ cmacs.ui.Frame = function(parent, session, opt_options) {
       this.evaluateCurrentBuffer();
   }.bind(this));
 
-  this.viewContainer_.editor_.commands.addCommand({
-    name: "Next tab",
-    bindKey: { win: "Ctrl+Tab", mac: "Command+Tab" },
-    exec: function() {
-      this.tabStrip_.switchToNextTab();
-    }.bind(this),
-    readOnly: true
-  });
+  this.keyBinder_ = new cmacs.input.KeyBinder(window);
 
-  this.viewContainer_.editor_.commands.addCommand({
-    name: "Previous tab",
-    bindKey: { win: "Ctrl+Shift+Tab", mac: "Command+Shift+Tab" },
-    exec: function() {
-      this.tabStrip_.switchToPreviousTab();
-    }.bind(this),
-    readOnly: true
-  });
-
-  this.viewContainer_.editor_.commands.addCommand({
-    name: 'New tab',
-    bindKey: {
-      win: 'Ctrl+T',
-      mac: 'Command+T'
-    },
-    exec: this.createNewTab.bind(this),
-    readOnly: true
-  });
+  this.keyBinder_.bindKey('C-Tab',
+      this.tabStrip_.switchToNextTab.bind(this.tabStrip_));
+  this.keyBinder_.bindKey('C-S-Tab',
+      this.tabStrip_.switchToPreviousTab.bind(this.tabStrip_));
+  this.keyBinder_.bindKey('C-t', this.createNewTab.bind(this));
+  this.keyBinder_.bindKey('C-w', this.closeCurrentTab.bind(this));
 
   this.environment_ = null;
   cmacs.env.createEnvironment(this.onEnvironmentReady_.bind(this));
@@ -76,4 +57,12 @@ cmacs.ui.Frame.prototype.createNewTab = function() {
   var view = new cmacs.edit.View(new cmacs.edit.Buffer());
   this.session_.addView(view);
   this.viewContainer_.switchToView(view);
+};
+
+cmacs.ui.Frame.prototype.closeCurrentTab = function() {
+  var view = this.viewContainer_.getCurrentView();
+  if (view === null)
+    chrome.app.window.current().close();
+  this.tabStrip_.switchToNextTab();
+  this.session_.removeView(view);
 };
