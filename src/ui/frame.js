@@ -15,11 +15,6 @@ cmacs.ui.Frame = function(parent, session, opt_options) {
       this.viewContainer_);
   this.statusBar_ = new cmacs.ui.StatusBar(this.element_, session);
 
-  window.addEventListener('keypress', function(e) {
-    if (e.which === 10 && e.ctrlKey)
-      this.evaluateCurrentBuffer();
-  }.bind(this));
-
   this.keyBinder_ = new cmacs.input.KeyBinder(window);
 
   this.keyBinder_.bindKey('C-Tab',
@@ -29,6 +24,7 @@ cmacs.ui.Frame = function(parent, session, opt_options) {
   this.keyBinder_.bindKey('C-t', this.createNewTab.bind(this));
   this.keyBinder_.bindKey('C-w', this.closeCurrentTab.bind(this));
   this.keyBinder_.bindKey('C-n', cmacs.createNewWindow);
+  this.keyBinder_.bindKey('C-e', this.evaluateCurrentBuffer.bind(this));
 
   this.environment_ = null;
   cmacs.env.createEnvironment(this.onEnvironmentReady_.bind(this));
@@ -66,4 +62,12 @@ cmacs.ui.Frame.prototype.closeCurrentTab = function() {
     chrome.app.window.current().close();
   this.tabStrip_.switchToNextTab();
   this.session_.removeView(view);
+};
+
+cmacs.ui.Frame.prototype.bindKey = function(spec, callback) {
+  this.keyBinder_.bindKey(spec, callback);
+};
+
+cmacs.ui.Frame.prototype.getCurrentBuffer = function() {
+  return this.viewContainer_.getCurrentView().getBuffer();
 };

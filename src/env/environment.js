@@ -7,6 +7,8 @@ cmacs.env.Environment.prototype.initialize = function(opt_callback) {
   cccEnvironment.importLibrary(ccc.lib.base);
   cccEnvironment.bindGlobal("window", new ccc.NativeObject(window));
 
+  cccEnvironment.importLibrary(cmacs.ccclib);
+
   this.cccEnvironment_ = cccEnvironment;
   var libraryForms = ccc.Parser.parse(ccc.lib.base.keywords);
   cccEnvironment.evalProgram(libraryForms, function(value, isFinal) {
