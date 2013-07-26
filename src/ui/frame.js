@@ -25,6 +25,7 @@ cmacs.ui.Frame = function(parent, session, opt_options) {
   this.keyBinder_.bindKey('C-w', this.closeCurrentTab.bind(this));
   this.keyBinder_.bindKey('C-n', cmacs.createNewWindow);
   this.keyBinder_.bindKey('C-e', this.evaluateCurrentBuffer.bind(this));
+  this.keyBinder_.bindKey('C-l', this.insertText.bind(this, "\u03bb"));
 
   this.environment_ = null;
   cmacs.env.createEnvironment(this.onEnvironmentReady_.bind(this));

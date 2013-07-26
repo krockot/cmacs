@@ -12,18 +12,6 @@ cmacs.ui.ViewContainer = function(parent, session) {
   this.editor_.setHighlightActiveLine(false);
   this.editor_.setPrintMarginColumn(0);
 
-  this.editor_.commands.addCommand({
-    name: 'Insert lambda',
-    bindKey: {
-      win: 'Ctrl+L',
-      mac: 'Command+L'
-    },
-    exec: function(editor) {
-      this.editor_.insert('\u03bb');
-    }.bind(this),
-    readOnly: false
-  });
-
   this.currentView_ = null;
   this.onViewChanged = new cmacs.common.Event();
 
