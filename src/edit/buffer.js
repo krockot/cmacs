@@ -31,3 +31,7 @@ cmacs.edit.Buffer.prototype.getName = function() {
 cmacs.edit.Buffer.prototype.getContents = function() {
   return this.document_.getValue();
 };
+
+cmacs.edit.Buffer.prototype.insertText = function(position, text) {
+  this.document_.insert(position, text);
+};

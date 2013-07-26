@@ -53,3 +53,7 @@ cmacs.ui.ViewContainer.prototype.switchToView = function(view, dontFocus) {
 cmacs.ui.ViewContainer.prototype.getCurrentView = function() {
   return this.currentView_;
 };
+
+cmacs.ui.ViewContainer.prototype.getCursorPosition = function() {
+  return this.editor_.getCursorPosition();
+};

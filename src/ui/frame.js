@@ -68,6 +68,20 @@ cmacs.ui.Frame.prototype.bindKey = function(spec, callback) {
   this.keyBinder_.bindKey(spec, callback);
 };
 
+cmacs.ui.Frame.prototype.getCurrentView = function() {
+  return this.viewContainer_.getCurrentView();
+}
+
 cmacs.ui.Frame.prototype.getCurrentBuffer = function() {
-  return this.viewContainer_.getCurrentView().getBuffer();
+  var view = this.getCurrentView();
+  if (!view)
+    return null;
+  return view.getBuffer();
+};
+
+cmacs.ui.Frame.prototype.insertText = function(text) {
+  var buffer = this.getCurrentBuffer();
+  if (buffer === null)
+    return;
+  buffer.insertText(this.viewContainer_.getCursorPosition(), text);
 };
