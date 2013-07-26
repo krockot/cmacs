@@ -1,5 +1,5 @@
 cmacs
 =====
 
-Scriptable editor for the Chrome Apps platform.
+Scriptable text editor for Chrome.
 
