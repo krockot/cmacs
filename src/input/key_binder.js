@@ -13,7 +13,8 @@ cmacs.input.KeyBinder.modMask = function(ctrl, shift, meta) {
 };
 
 cmacs.input.KeyBinder.modMaskFromEvent = function(e) {
-  return cmacs.input.KeyBinder.modMask(e.ctrlKey, e.shiftKey, e.altKey);
+  return cmacs.input.KeyBinder.modMask(
+      e.ctrlKey | e.metaKey, e.shiftKey, e.altKey);
 };
 
 cmacs.input.KeyBinder.idFromKeyCodeAndModMask = function(keyCode, modMask) {
