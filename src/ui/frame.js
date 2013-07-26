@@ -28,6 +28,7 @@ cmacs.ui.Frame = function(parent, session, opt_options) {
       this.tabStrip_.switchToPreviousTab.bind(this.tabStrip_));
   this.keyBinder_.bindKey('C-t', this.createNewTab.bind(this));
   this.keyBinder_.bindKey('C-w', this.closeCurrentTab.bind(this));
+  this.keyBinder_.bindKey('C-n', cmacs.createNewWindow);
 
   this.environment_ = null;
   cmacs.env.createEnvironment(this.onEnvironmentReady_.bind(this));
