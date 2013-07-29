@@ -14,19 +14,6 @@ cmacs.ui.TabStrip = function(parent, session, viewContainer) {
   this.updateTabs();
 };
 
-cmacs.ui.TabStrip.prototype.switchToTab = function(index) {
-  if (index >= this.tabs_.length)
-    throw new Error("Tab index out of bounds");
-
-  var tab = this.tabs_[index];
-  var view = tab.view;
-  this.tabs_.forEach(function(t) {
-    t.classList.remove('active-tab');
-  });
-  tab.classList.add('active-tab');
-  this.viewContainer_.switchToView(view);
-};
-
 cmacs.ui.TabStrip.prototype.createTabForView_ = function(view) {
   var tab = {
     view: view,
