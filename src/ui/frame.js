@@ -61,7 +61,6 @@ cmacs.ui.Frame.prototype.closeCurrentTab = function() {
   var view = this.viewContainer_.getCurrentView();
   if (view === null)
     chrome.app.window.current().close();
-  this.tabStrip_.switchToNextTab();
   this.session_.removeView(view);
 };
 
