@@ -24,3 +24,17 @@ cmacs.edit.Session.prototype.removeView = function(view) {
     this.onChanged.fire();
   }
 };
+
+cmacs.edit.Session.prototype.getMostRecentlyUsedView = function() {
+  if (this.views_.length < 1)
+    return null;
+  var newestTime = 0, newest = this.views_[0];
+  this.views_.forEach(function(view) {
+    var lastActive = view.getLastActive();
+    if (lastActive > newestTime) {
+      newestTime = lastActive;
+      newest = view;
+    }
+  });
+  return newest;
+};

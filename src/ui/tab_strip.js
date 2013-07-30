@@ -7,7 +7,6 @@ cmacs.ui.TabStrip = function(parent, session, viewContainer) {
   this.session_ = session;
   this.viewContainer_ = viewContainer;
   this.tabs_ = [];
-  this.viewHistory_ = [];
 
   this.session_.onChanged.addListener(this.updateTabs.bind(this));
   this.viewContainer_.onViewChanged.addListener(this.updateTabs.bind(this));
@@ -42,10 +41,6 @@ cmacs.ui.TabStrip.prototype.updateTabs = function() {
   if (views.length === 0)
     return;
 
-  this.viewHistory_ = this.viewHistory_.filter(function(view) {
-    return views.indexOf(view) >= 0;
-  });
-
   var tabWidth = 100 / views.length;
   var tabActive = false;
   views.forEach(function(view) {
@@ -57,13 +52,11 @@ cmacs.ui.TabStrip.prototype.updateTabs = function() {
       tab.element.classList.add('active');
       tab.active = true;
       tabActive = true;
-      if (this.viewHistory_[0] !== view)
-        this.viewHistory_.unshift(view);
     }
   }.bind(this));
 
-  if (!tabActive && this.viewHistory_.length > 0) {
-    this.viewContainer_.switchToView(this.viewHistory_[0]);
+  if (!tabActive) {
+    this.viewContainer_.switchToView(this.session_.getMostRecentlyUsedView());
   }
 };
 

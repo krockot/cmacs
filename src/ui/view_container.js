@@ -32,6 +32,7 @@ cmacs.ui.ViewContainer.prototype.handleSessionChange_ = function() {
 cmacs.ui.ViewContainer.prototype.switchToView = function(view, dontFocus) {
   this.editor_.setSession(view.aceSession_);
   this.currentView_ = view;
+  view.activate();
   if (!dontFocus) {
     this.editor_.focus();
   }
