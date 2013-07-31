@@ -4,6 +4,10 @@ cmacs.edit.Session = function() {
   this.onChanged = new cmacs.common.Event();
 };
 
+cmacs.edit.Session.prototype.notifyChanged = function() {
+  this.onChanged.fire();
+};
+
 cmacs.edit.Session.prototype.restore = function(config) {
   console.warn('Session restore NYI');
 };
@@ -14,7 +18,8 @@ cmacs.edit.Session.prototype.getViews = function() {
 
 cmacs.edit.Session.prototype.addView = function(view) {
   this.views_.push(view);
-  this.onChanged.fire();
+  view.getBuffer().onNameChanged.addListener(this.notifyChanged.bind(this));
+  this.notifyChanged();
 };
 
 cmacs.edit.Session.prototype.removeView = function(view) {

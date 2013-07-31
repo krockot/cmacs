@@ -14,4 +14,25 @@ cmacs.ccclib.registerEntries([
       view.setMode(mode.value_);
     },
   },
+  {
+    name: 'load-from-file',
+    requiredArgs: ['String'],
+    impl: function(filename) {
+      var buffer = cmacs.frame.getCurrentBuffer();
+      if (buffer)
+        buffer.loadFromFile(filename.value_);
+    },
+  },
+  {
+    name: 'save-to-file',
+    optionalArgs: ['String'],
+    impl: function(opt_filename) {
+      var buffer = cmacs.frame.getCurrentBuffer();
+      if (!buffer)
+        return;
+      if (opt_filename === ccc.unspecified)
+        buffer.save();
+      buffer.saveToFile(opt_filename.value_);
+    },
+  },
 ]);

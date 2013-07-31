@@ -26,6 +26,7 @@
     "storage",
     "syncFileSystem",
     "tts",
+    "unlimitedStorage",
     "usb",
     "webview",
     "https://*/*"
